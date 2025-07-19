@@ -1,0 +1,33 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-info navbar-infor">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'myapp:store' %}">E-cormmenrce</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'myapp:store' %}">E cormmerce</a>
+                </li>
+
+            </ul>
+            <div class="form-initial d-flex align-items-center gap-3 my-2 my-lg-0">
+                <!-- Login Button -->
+                <a class="btn btn-outline-success px-4" href="#">Login</a>
+
+                <!-- Cart Item Count -->
+                <span class="text-success fw-bold fs-5">0</span>
+
+                <!-- Cart Icon Button -->
+                <a class="btn btn-outline-success d-flex align-items-center justify-content-center p-2"
+                    href="{% url 'myapp:cart' %}">
+                    <img src="{% static 'images/cart.jpeg' %}" alt="cart-icon" style="width: 30px; height: 30px;">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>

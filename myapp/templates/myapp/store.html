@@ -5,6 +5,82 @@ Store
 {% endblock title %}
 
 {% block content %}
-<h1>Welcome to the Store</h1>
+<div class="row my-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-column">
+            <!-- Product Image -->
+            <img src="{% static 'images/bag.jpeg' %}" class="card-img-top rounded-top-4 img-fluid object-fit-cover"
+                style="height: 200px;" alt="Product Image">
+
+            <!-- Card Body -->
+            <div class="card-body d-flex flex-column">
+                <!-- Title -->
+                <h5 class="card-title fw-bold mb-2">Classic Leather Bag</h5>
+
+                <!-- Price -->
+                <p class="text-success fw-semibold fs-5 mb-3">Cost: $400</p>
+
+                <!-- Add to Cart Button -->
+                <a href="#" class="btn btn-outline-success w-100 mb-2">Add to Cart</a>
+
+                <!-- View Button pushed to bottom -->
+                <div class="mt-auto">
+                    <a href="#" class="btn btn-primary w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-column">
+            <!-- Product Image -->
+            <img src="{% static 'images/shoes.jpeg' %}" class="card-img-top rounded-top-4 img-fluid object-fit-cover"
+                style="height: 200px;" alt="Product Image">
+
+            <!-- Card Body -->
+            <div class="card-body d-flex flex-column">
+                <!-- Title -->
+                <h5 class="card-title fw-bold mb-2">Classic Leather Bag</h5>
+
+                <!-- Price -->
+                <p class="text-success fw-semibold fs-5 mb-3">Cost: $400</p>
+
+                <!-- Add to Cart Button -->
+                <a href="#" class="btn btn-outline-success w-100 mb-2">Add to Cart</a>
+
+                <!-- View Button pushed to bottom -->
+                <div class="mt-auto">
+                    <a href="#" class="btn btn-primary w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-column">
+            <!-- Product Image -->
+            <img src="{% static 'images/boot.jpeg' %}" class="card-img-top rounded-top-4 img-fluid object-fit-cover"
+                style="height: 200px;" alt="Product Image">
+
+            <!-- Card Body -->
+            <div class="card-body d-flex flex-column">
+                <!-- Title -->
+                <h5 class="card-title fw-bold mb-2">Classic Leather Bag</h5>
+
+                <!-- Price -->
+                <p class="text-success fw-semibold fs-5 mb-3">Cost: $400</p>
+
+                <!-- Add to Cart Button -->
+                <a href="#" class="btn btn-outline-success w-100 mb-2">Add to Cart</a>
+
+                <!-- View Button pushed to bottom -->
+                <div class="mt-auto">
+                    <a href="#" class="btn btn-primary w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 
 {% endblock content %}
