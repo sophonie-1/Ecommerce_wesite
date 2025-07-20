@@ -3,50 +3,55 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class CustomerProfile(models.Model):
+class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254, unique=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    customer_image = models.ImageField(upload_to='customer_images/', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    date_of_birth = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=150, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user.username}'s Profile"
+        return self.name
     
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     digital = models.BooleanField(default=False)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
-    stock = models.PositiveIntegerField(default=0)
+    #stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
     
+    #we use this where no image provide to avode error
+    @property
+    def imageUrl(self):
+        try:
+            url =self.image.url
+        except:
+            url =''
+        return url
+    
 class Order(models.Model):
-    status_choices = (
-        ('Pending', 'Pending'),
-        ('Processing', 'Processing'),
-        ('Completed', 'Completed'),
-        ('Cancelled', 'Cancelled'),
-    )
-    customer = models.ForeignKey(CustomerProfile, on_delete=models.SET_NULL ,null=True)
+    # status_choices = (
+    #     ('Pending', 'Pending'),
+    #     ('Processing', 'Processing'),
+    #     ('Completed', 'Completed'),
+    #     ('Cancelled', 'Cancelled'),
+    # )
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL ,null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=status_choices, default='Pending')
+    #status = models.CharField(max_length=20, choices=status_choices, default='Pending')
     completed = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"Order {self.id} by {self.customer.user.username}"
+        return str(self.id)
     
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='items', on_delete=models.SET_NULL,null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL,null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL,null=True)
     quantity = models.PositiveIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -56,13 +61,13 @@ class OrderItem(models.Model):
         return f"{self.quantity} x {self.product.name} in Order {self.order.id}"
     
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(CustomerProfile, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address_line1= models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=20)
-    country = models.CharField(max_length=100)
+    # country = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
