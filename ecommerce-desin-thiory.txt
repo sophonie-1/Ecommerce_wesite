@@ -1,4 +1,7 @@
-﻿Absolutely, Bukira! Let’s explain it as if we’re talking to someone who has no background in coding or websites — just everyday understanding. We’ll use a real-world shop example so it feels natural.
+﻿Absolutely, Bukira! Let’s explain it as if we’re talking 
+to someone who has no background in coding or websites — 
+just everyday understanding. We’ll use a real-world shop example 
+so it feels natural.
 
 🛍️ Imagine This: You Own a Real Physical Shop
 Let’s say you open a small store.
@@ -64,10 +67,15 @@ Because:
     • We need to keep records of what they bought, so we can deliver.
 Just like a physical store has:
     • Shelves, baskets, and a cashier...
-    • A website has: products, carts, and orders — all recorded inside the computer.
+    • A website has: products, carts, and orders — 
+    all recorded inside the computer.
 
-Would you like me to create a simple comic-style explanation showing Amina walking through this process step by step visually? That might help even more.
-Great! Since you already have some coding knowledge, let's explain this in a developer-friendly way, using a real-world flow and code logic mindset, not just theory.
+Would you like me to create a simple comic-style explanation 
+showing Amina walking through this process step by step visually?
+ That might help even more.
+Great! Since you already have some coding knowledge, let's 
+explain this in a developer-friendly way, using a real-world 
+flow and code logic mindset, not just theory.
 
 🔁 E-Commerce Database Explained Like You're Coding a Real App
 
@@ -94,7 +102,8 @@ Why?
 You want to know who is shopping, making orders, etc.
 
 🛒 3. Cart & CartItem – What They Plan to Buy
-Before checkout, users pick items. You need a temporary holder – that's the cart.
+Before checkout, users pick items. You need a temporary holder – 
+that's the cart.
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -123,7 +132,8 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
 Why?
-    • Even if the product price changes tomorrow, you store price at time of order.
+    • Even if the product price changes tomorrow, you store price
+     at time of order.
     • You can later do:
 Order.objects.filter(user=user).latest('created_at')
 
@@ -144,7 +154,8 @@ If I were you, Bukira, building this, I’d think:
     • I need Product to display items
     • I need Cart to temporarily store picks
     • I need Order to store purchases permanently
-    • I don’t want to mix the two — that’s separation of concern (clean code principle)
+    • I don’t want to mix the two — that’s separation of 
+    concern (clean code principle)
 
 ✅ Final Code Flow
 # Amina logs in
@@ -165,8 +176,12 @@ for item in cart.cartitem_set.all():
     )
 cart.cartitem_set.all().delete()  # clear cart
 
-Would you like me to generate a minimal Django project structure or walk through implementing this in real code files?
-Absolutely, Bukira! Let’s explain it as if we’re talking to someone who has no background in coding or websites — just everyday understanding. We’ll use a real-world shop example so it feels natural.
+Would you like me to generate a minimal Django project 
+structure or walk through implementing this in real code files?
+Absolutely, Bukira! Let’s explain it as if we’re talking to 
+someone who has no background in coding or websites — 
+just everyday understanding. We’ll use a real-world shop example so
+ it feels natural.
 
 🛍️ Imagine This: You Own a Real Physical Shop
 Let’s say you open a small store.
@@ -232,13 +247,18 @@ Because:
     • We need to keep records of what they bought, so we can deliver.
 Just like a physical store has:
     • Shelves, baskets, and a cashier...
-    • A website has: products, carts, and orders — all recorded inside the computer.
+    • A website has: products, carts, and orders — all recorded inside 
+    the computer.
 
-Would you like me to create a simple comic-style explanation showing Amina walking through this process step by step visually? That might help even more.
-Perfect, Bukira! Let’s now focus only on Order and OrderItem, and I’ll explain it step by step in a very simple and real-world way, then connect it with Django code.
+Would you like me to create a simple comic-style explanation showing Amina 
+walking through this process step by step visually? That might help even more.
+Perfect, Bukira! Let’s now focus only on Order and OrderItem, and I’ll 
+explain it step by step in a very simple and real-world way, then connect 
+it with Django code.
 
 📦 What is an Order?
-Think of an Order like a receipt or invoice someone gets after buying items in a shop.
+Think of an Order like a receipt or invoice someone gets after 
+buying items in a shop.
 🧑‍💼 Amina's Example:
 She buys:
     • 2 T-shirts
@@ -285,7 +305,8 @@ This stores:
     • Which order it belongs to
     • Which product was bought
     • How many
-    • What price (we save the price at that moment even if product price changes later)
+    • What price (we save the price at that moment even if 
+    product price changes later)
 
 🔄 Example in Action
 Let’s say Amina places this order:
@@ -342,5 +363,6 @@ Total: $30
 Each line (item) = OrderItem
 All together = Order
 
-Would you like a visual image to represent this concept too (like a sample order with Amina’s details and items)?
+Would you like a visual image to represent this concept too 
+(like a sample order with Amina’s details and items)?
 
