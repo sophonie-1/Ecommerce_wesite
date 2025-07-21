@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product,Customer, Order, OrderItem
 # Create your views here.
 
 
@@ -11,7 +11,34 @@ def store_view(request):
     return render(request, 'myapp/store.html',context)
 
 def cart_view(request):
-    return render(request, 'myapp/cart.html')
+    if request.user.is_authenticated:
+        customer = Customer.objects.get(user=request.user)
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        order_items = OrderItem.objects.filter(order=order)
+        total_price = sum(float(item.price) * float(item.quantity) for item in order_items)
+        
+    else:
+        order_items = []
+    context = {
+        'order_items': order_items,
+        'order': order if request.user.is_authenticated else None,
+        'total_price': total_price if request.user.is_authenticated else 0,
+    }
+        
+    return render(request, 'myapp/cart.html', context)
 
 def checkout_view(request):
-    return render(request, 'myapp/checkout.html')
+    if request.user.is_authenticated:
+        customer = Customer.objects.get(user=request.user)
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        order_items = OrderItem.objects.filter(order=order)
+        total_price = sum(float(item.price) * float(item.quantity) for item in order_items)
+        
+    else:
+        order_items = []
+    context = {
+        'order_items': order_items,
+        'order': order if request.user.is_authenticated else None,
+        'total_price': total_price if request.user.is_authenticated else 0,
+    }
+    return render(request, 'myapp/checkout.html',context)

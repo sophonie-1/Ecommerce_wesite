@@ -33,16 +33,16 @@ cart
             </thead>
             <tbody>
 
-                {% comment %}
-                {% for item in cart_items %}
-                {% endcomment %}
+
+                {% for item in order_items %}
+
 
 
 
                 <tr>
                     <td class="text-center">
-                        <img src="{% static 'images/boot.jpeg' %}" alt="{{ item.product.name }}"
-                            class="img-thumbnail rounded" style="width: 60px; height: 60px; object-fit: cover;">
+                        <img src="{{item.product.imageUrl}}" alt="{{ item.product.name }}" class="img-thumbnail rounded"
+                            style="width: 60px; height: 60px; object-fit: cover;">
                     </td>
 
                     <td>${{ item.product.price }}</td>
@@ -66,9 +66,9 @@ cart
                     <td></td>
                 </tr>
 
-                {% comment %}
+
                 {% endfor %}
-                {% endcomment %}
+
 
 
 
