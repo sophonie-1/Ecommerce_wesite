@@ -34,21 +34,22 @@ class Product(models.Model):
         return url
     
 class Order(models.Model):
-    # status_choices = (
-    #     ('Pending', 'Pending'),
-    #     ('Processing', 'Processing'),
-    #     ('Completed', 'Completed'),
-    #     ('Cancelled', 'Cancelled'),
-    # )
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL ,null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
-    #status = models.CharField(max_length=20, choices=status_choices, default='Pending')
     completed = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
+    
+    @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for item in orderitems:
+            if item.product.digital == False:
+                shipping = True
+        return shipping
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL,null=True)
@@ -76,11 +77,11 @@ class OrderItem(models.Model):
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    address_line1= models.CharField(max_length=255, blank=True, null=True)
-    city = models.CharField(max_length=100)
+    address= models.CharField(max_length=255, blank=True, null=True)
+    # city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=20)
-    # country = models.CharField(max_length=100)
+    country = models.CharField(max_length=100,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
