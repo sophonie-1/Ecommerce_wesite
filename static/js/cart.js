@@ -13,13 +13,42 @@ for (let i=0;i<updateCartButtons.length;i++){
 
         if (user === 'AnonymousUser') {
             console.log('User is not logged in')
-            alert('Please log in to add items to your cart.')
+            addCookieItem(productId, action)
+            
         }else{
             console.log('User is authenticated, sending data...')
             updateUserCart(productId, action)
         }
     })
 }
+
+
+// Function to update the user's cart
+
+function addCookieItem(productId, action) {
+    console.log('User is not authenticated, adding item to cookie...');
+
+    if (action === 'add') {
+        if (cart[productId] === undefined) {
+            cart[productId] = {'quantity': 1}
+        } else {
+            cart[productId]['quantity'] += 1
+        }
+    }
+
+    if (action === 'remove') {
+        cart[productId]['quantity'] -= 1
+        if (cart[productId]['quantity'] <= 0) {
+            console.log('Item removed from cart')
+            delete cart[productId]
+        }
+    }
+
+    console.log('Cart:', cart);
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+}
+
+
 
 const updateUserCart = (productId, action) => {
     console.log('User is authenticated, sending data...');

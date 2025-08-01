@@ -40,7 +40,6 @@ def checkout_view(request):
         order, created = Order.objects.get_or_create(customer=customer, completed=False)
         order_items = OrderItem.objects.filter(order=order)
         total_price = sum(float(item.price) * float(item.quantity) for item in order_items)
-        
     else:
         order_items = []
     context = {
